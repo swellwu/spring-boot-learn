@@ -1,12 +1,10 @@
 package com.swellwu.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>Description:</p>
+ * <p>hello world!</p>
  *
  * @author xinjian.wu
  * @date 2017-06-22
@@ -14,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloWorldController {
 
-    @GetMapping("/")
+    @GetMapping("/hello")
     public String helloworld(){
-        return "hello world!";
+        return "Hello World!";
     }
 }
