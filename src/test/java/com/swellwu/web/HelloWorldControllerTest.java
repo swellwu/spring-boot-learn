@@ -1,8 +1,10 @@
-package com.swellwu.controller;
+package com.swellwu.web;
 
+import com.swellwu.Application;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -20,8 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author xinjian.wu
  * @date 2017-06-23
  */
+@SpringBootTest(classes = Application.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
 public class HelloWorldControllerTest {
 
     private MockMvc mvc;
