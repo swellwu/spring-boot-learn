@@ -36,3 +36,4 @@ public class BookProperties {
 }
 ```
 根据配置类定义的前缀和字段名，会与配置文件中匹配的字段完成注入。
+***目前@PropertySource不支持自定义的yaml文件。***
