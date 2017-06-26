@@ -1,5 +1,7 @@
 package com.swellwu.web;
 
+import com.swellwu.bean.BookProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,8 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloWorldController {
 
+    @Autowired
+    BookProperties bookProperties;
+
     @GetMapping("/hello")
     public String helloworld(){
         return "Hello World!";
+    }
+
+    @GetMapping("/book")
+    public String book(){
+        return bookProperties.getDesc();
     }
 }
