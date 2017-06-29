@@ -1,14 +1,13 @@
 package com.swellwu.mapper;
 
 import com.swellwu.Application;
+import com.swellwu.dao.UserService;
 import com.swellwu.po.User;
-import org.apache.ibatis.logging.LogFactory;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cache.CacheManager;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,25 +22,20 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserMapperTest {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
-    @Before
-    public void setUp(){
-        userMapper.insert("AAA",22);
-    }
+    @Autowired
+    private CacheManager cacheManager;
 
     @Test
-    public void findByName(){
-        User u = userMapper.findByName("AAA");
-        Assert.assertEquals(22, u.getAge().intValue());
-    }
-
-    @Test
-    public void cacheTest(){
-        User u1 = userMapper.findByName("AAA");
-        System.out.println("第一次查询：" + u1.getAge());
-        User u2 = userMapper.findByName("AAA");
-        System.out.println("第一次查询：" + u2.getAge());
+    public void cacheTest1(){
+        User user = new User("AAA",11);
+        user = userService.insert(user);
+        User user1 = userService.findById(user.getId());
+        System.out.println("第一次查询：" + user1.getAge());
+        userService.insert(user);
+        User user2 = userService.findById(user.getId());
+        System.out.println("第一次查询：" + user2.getAge());
     }
 
 }

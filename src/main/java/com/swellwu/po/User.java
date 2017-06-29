@@ -1,12 +1,14 @@
 package com.swellwu.po;
 
-/**
- * Created by wuxinjian on 2017/6/27.
- */
 public class User {
     private Long id;
     private String name;
     private Integer age;
+
+    public User(String name,Integer age){
+        this.name=name;
+        this.age=age;
+    }
 
     public Long getId() {
         return id;

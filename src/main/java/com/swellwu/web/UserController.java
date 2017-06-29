@@ -1,6 +1,6 @@
 package com.swellwu.web;
 
-import com.swellwu.bean.User;
+import com.swellwu.po.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
