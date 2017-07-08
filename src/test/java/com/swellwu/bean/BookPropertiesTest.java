@@ -1,6 +1,7 @@
 package com.swellwu.bean;
 
 import com.swellwu.Application;
+import com.swellwu.config.properties.BookProperties;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

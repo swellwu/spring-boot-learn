@@ -13,6 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import javax.swing.*;
+
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -24,7 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author xinjian.wu
  * @date 2017-06-23
  */
-@SpringBootTest
+@SpringBootTest(classes = Application.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 public class HelloWorldControllerTest {
 
     private MockMvc mvc;
@@ -41,11 +44,4 @@ public class HelloWorldControllerTest {
                 .andExpect(content().string(equalTo("Hello World!")));
     }
 
-//    TODO: mock测试失败，但是实际环境下正常
-//    @Test
-//    public void getBook() throws Exception {
-//        mvc.perform(MockMvcRequestBuilders.get("/book").accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk())
-//                .andExpect(content().string(containsString("CLRS")));
-//    }
 }
