@@ -15,7 +15,7 @@ import org.springframework.cache.annotation.Cacheable;
 @CacheConfig(cacheNames = "users")
 public interface UserMapper {
 
-    @Cacheable
+    @Cacheable(key = "#p0")
     @Select("SELECT * FROM user WHERE name = #{name}")
     User findByName(@Param("name") String name);
 
