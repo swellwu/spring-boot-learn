@@ -29,4 +29,5 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(interceptorOne());
         registry.addInterceptor(interceptorTwo());
     }
+
 }

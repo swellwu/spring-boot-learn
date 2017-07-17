@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springside.modules.utils.base.ObjectUtil;
 import org.springside.modules.utils.mapper.JsonMapper;
-import org.thymeleaf.expression.Objects;
 
 /**
  * <p>Description:</p>
@@ -47,10 +46,12 @@ public class LogsAspect {
     @AfterThrowing(pointcut = "allPointcut()", throwing = "e")
     public void doAfterThrowing(JoinPoint joinPoint, Throwable e) {
         String params = "";
+        StringBuffer sb=new StringBuffer();
         if (joinPoint.getArgs() != null && joinPoint.getArgs().length > 0) {
             for (int i = 0; i < joinPoint.getArgs().length; i++) {
-                params += JsonMapper.INSTANCE.toJson(joinPoint.getArgs()[i]) + ";";
+                sb.append(JsonMapper.INSTANCE.toJson(joinPoint.getArgs()[i])).append(";");
             }
+            params=sb.toString();
         }
         try {
             /* ========控制台输出========= */
