@@ -18,6 +18,31 @@ public class Student {
         this.sex = sex;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Student student = (Student) o;
+
+        if (id != null ? !id.equals(student.id) : student.id != null) return false;
+        if (name != null ? !name.equals(student.name) : student.name != null) return false;
+        if (age != null ? !age.equals(student.age) : student.age != null) return false;
+        return sex != null ? sex.equals(student.sex) : student.sex == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (age != null ? age.hashCode() : 0);
+        result = 31 * result + (sex != null ? sex.hashCode() : 0);
+        return result;
+    }
+
+
+
     public Integer getId() {
         return id;
     }

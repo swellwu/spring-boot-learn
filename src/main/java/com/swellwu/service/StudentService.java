@@ -20,7 +20,6 @@ import java.util.List;
  */
 public interface StudentService {
 
-
     Student getStudentById(Integer id);
 
     void insert(Student student);
