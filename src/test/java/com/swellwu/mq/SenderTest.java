@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.Assert.*;
 
 /**
@@ -21,8 +23,12 @@ public class SenderTest {
 
     @Autowired
     private Sender sender;
+
     @Test
     public void hello() throws Exception {
-        sender.send();
+        for (int i = 0; i < 100; ++i) {
+            TimeUnit.SECONDS.sleep(1);
+            sender.send();
+        }
     }
 }

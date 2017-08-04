@@ -1,8 +1,11 @@
 package com.swellwu.mq;
 
+import com.swellwu.po.Student;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springside.modules.utils.mapper.JsonMapper;
+
 import java.util.Date;
 /**
  * <p>Description:</p>
@@ -17,8 +20,8 @@ public class Sender {
     private AmqpTemplate rabbitTemplate;
 
     public void send() {
-        String context = "hello " + new Date();
-        System.out.println("Sender : " + context);
-        rabbitTemplate.convertAndSend("hello", context);
+        Student student = new Student("111");
+        System.out.println("Sender : " + student);
+        rabbitTemplate.convertAndSend("uc_common_logs", JsonMapper.INSTANCE.toJson(student));
     }
 }

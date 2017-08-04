@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+      http://www.springframework.org/schema/rabbit
+      http://www.springframework.org/schema/rabbit/spring-rabbit-1.2.xsd">
+    <!-- 连接服务配置 -->
+    <description>rabbitmq 连接服务配置</description>
+    <rabbit:connection-factory id="connectionFactory"
+                               addresses="${rabbitmq.host}" username="${rabbitmq.username}"
+                               password="${rabbitmq.password}"
+                               virtual-host="${rabbitmq.vhost}"/>
+    <!-- 连接服务配置 -->
+    <rabbit:admin connection-factory="connectionFactory"/>
+    <!--操作日志记录 -->
+    <rabbit:queue id="uc_common_logs" durable="true"
+                  auto-delete="false" exclusive="false" name="uc_common_logs"></rabbit:queue>
+    <!--通用 给用户增加积分队列 -->
+
+    <!-- exchange queue binging key 绑定 -->
+    <rabbit:direct-exchange name="uc-mq-exchange"
+                            durable="true" auto-delete="false" id="uc-mq-exchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="uc_common_logs" key="uc_common_logs"/>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!-- spring template声明 -->
+    <rabbit:template exchange="uc-mq-exchange" id="amqpTemplate"
+                     connection-factory="connectionFactory" channel-transacted="true"/>
+    <rabbit:listener-container
+            connection-factory="connectionFactory" acknowledge="auto"
+            message-converter="jsonMessageConverter">
+        <rabbit:listener ref="logsRecordConsumer" queue-names="uc_common_logs"/>
+    </rabbit:listener-container>
+    <bean id="jsonMessageConverter"
+          class="org.springframework.amqp.support.converter.JsonMessageConverter"/>
+
+    <bean id="logsRecordConsumer" class="com.swellwu.mq.LogsRecordConsumer"/>
+</beans>

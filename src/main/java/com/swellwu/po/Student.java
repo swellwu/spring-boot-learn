@@ -12,6 +12,10 @@ public class Student {
     public Student() {
     }
 
+    public Student(String name){
+        this.name = name;
+    }
+
     public Student(String name, Byte age, Byte sex) {
         this.name = name;
         this.age = age;
