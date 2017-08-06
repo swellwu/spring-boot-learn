@@ -112,4 +112,25 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <resources>
+            <!-- 排除文件 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>config/application-*.properties</exclude>
+                </excludes>
+            </resource>
+            <!-- 根据参数包含文件 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>config/application-${profiles.active}.properties</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 </project>
