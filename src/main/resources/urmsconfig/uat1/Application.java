@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 
 /**
+ *
  * <p>Description:</p>
  *
  * @author xinjian.wu
@@ -17,7 +18,7 @@ import org.springframework.cache.annotation.EnableCaching;
 public class Application {
 
     public static void main(String[] args) {
-        System.out.println("dev");
+        System.out.println("uat1");
         SpringApplication.run(Application.class,args);
     }
 }

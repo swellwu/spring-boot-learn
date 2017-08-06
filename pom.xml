@@ -120,6 +120,7 @@
                 <directory>src/main/resources</directory>
                 <excludes>
                     <exclude>env/**</exclude>
+                    <exclude>urmsconfig/**</exclude>
                 </excludes>
             </resource>
             <!-- 包含文件夹，将其中所有文件放置到classpath目录下 -->
@@ -127,5 +128,30 @@
                 <directory>src/main/resources/env/${profiles.active}</directory>
             </resource>
         </resources>
+
+        <!-- copy 测试  -->
+        <plugins>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo message="********************copy file *************************"/>
+                                <copy file="src/main/resources/urmsconfig/${profiles.active}/Application.java"
+                                      tofile="src/main/java/com/swellwu/Application.java" overwrite="true"/>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
+
+
+
 </project>
