@@ -115,21 +115,16 @@
 
     <build>
         <resources>
-            <!-- 排除文件 -->
+            <!-- 排除文件夹 -->
             <resource>
                 <directory>src/main/resources</directory>
-                <filtering>true</filtering>
                 <excludes>
-                    <exclude>config/application-*.properties</exclude>
+                    <exclude>env/**</exclude>
                 </excludes>
             </resource>
-            <!-- 根据参数包含文件 -->
+            <!-- 包含文件夹，将其中所有文件放置到classpath目录下 -->
             <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>config/application-${profiles.active}.properties</include>
-                </includes>
+                <directory>src/main/resources/env/${profiles.active}</directory>
             </resource>
         </resources>
     </build>
